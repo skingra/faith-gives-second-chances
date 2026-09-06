@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Faith Gives Second Chances</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ivory: #F6F3EA;
+    --ivory-deep: #EDE8D9;
+    --pine: #1F3B2C;
+    --pine-deep: #16291F;
+    --gold: #B98B34;
+    --gold-soft: #D9B876;
+    --clay: #954B2C;
+    --ink: #24261F;
+    --sage: #7C8570;
+    --line: rgba(36, 38, 31, 0.14);
+    --max: 1120px;
+  }
+
+  * { box-sizing: border-box; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+  }
+
+  html { scroll-behavior: smooth; }
+create table contact_messages (
+ id bigint generated always as identity primary key,
+ first_name text,
+ last_name text,
+ email text,
+ phone text,
+ reason text,
+ message text,
+ created_at timestamp default now()
+);
+  body {
+    margin: 0;
+    background: var(--ivory);
+    color: var(--ink);
+    font-family: 'Archivo', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Fraunces', serif;
+    color: var(--pine-deep);
+    margin: 0;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  a { color: inherit; }
+
+  img { max-width: 100%; display: block; }
+
+  :focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+  }
+
+  .wrap {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* ---------- Header ---------- */
+  header {
+    border-bottom: 1px solid var(--line);
+    background: var(--ivory);
+    position: sticky;
+    top: 0;
+    z-index: 20;
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 32px;
+    max-width: var(--max);
+    margin: 0 auto;
+  }
+
+  .nav-mark {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--pine-deep);
+    line-height: 1.2;
+  }
+
+  .nav-mark span {
+    display: block;
+    font-family: 'Archivo', sans-serif;
+    font-weight: 500;
+    font-size: 0.72rem;
+    color: var(--sage);
+    margin-top: 2px;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 0.92rem;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    padding-bottom: 3px;
+    transition: border-color 0.2s ease;
+  }
+
+  .nav-links a:hover { border-color: var(--gold); }
+
+  .nav-cta {
+    background: var(--pine-deep);
+    color: var(--ivory) !important;
+    padding: 10px 20px;
+    border-radius: 3px;
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .nav-toggle { display: none; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    padding: 84px 0 96px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 64px;
+    align-items: end;
+  }
+
+  .hero-label {
+    color: var(--clay);
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.4rem, 4.6vw, 3.6rem);
+    line-height: 1.08;
+    max-width: 14ch;
+  }
+
+  .hero-lede {
+    margin-top: 24px;
+    font-size: 1.1rem;
+    max-width: 46ch;
+    color: #3A3C32;
+  }
+
+  .hero-actions {
+    margin-top: 36px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 14px 26px;
+    border-radius: 3px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    border: 1px solid transparent;
+    cursor: pointer;
+    font-family: 'Archivo', sans-serif;
+  }
+
+  .btn-primary {
+    background: var(--pine-deep);
+    color: var(--ivory);
+  }
+  .btn-primary:hover { background: var(--pine); }
+
+  .btn-ghost {
+    background: transparent;
+    border-color: var(--ink);
+    color: var(--ink);
+  }
+  .btn-ghost:hover { border-color: var(--gold); color: var(--clay); }
+
+  .hero-panel {
+    background: var(--pine-deep);
+    color: var(--ivory-deep);
+    padding: 36px;
+    border-radius: 4px;
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .hero-panel blockquote {
+    margin: 0;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    line-height: 1.5;
+  }
+
+  .hero-panel cite {
+    display: block;
+    margin-top: 16px;
+    font-style: normal;
+    font-size: 0.85rem;
+    color: var(--gold-soft);
+  }
+
+  .hero-panel .stat-row {
+    display: flex;
+    gap: 28px;
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(246, 243, 234, 0.18);
+  }
+
+  .stat-num {
+    font-family: 'Fraunces', serif;
+    font-size: 1.6rem;
+    color: var(--gold-soft);
+  }
+
+  .stat-cap {
+    font-size: 0.78rem;
+    color: #B9C0AE;
+    margin-top: 2px;
+  }
+
+  /* ---------- Section shell ---------- */
+  section { padding: 88px 0; }
+  section.tight { padding: 72px 0; }
+
+  .section-head {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 48px;
+    margin-bottom: 52px;
+    align-items: start;
+  }
+
+  .section-head h2 {
+    font-size: clamp(1.8rem, 3vw, 2.3rem);
+    line-height: 1.15;
+  }
+
+  .section-head p {
+    color: #4B4E40;
+    font-size: 1.02rem;
+    max-width: 52ch;
+  }
+
+  .kicker {
+    color: var(--clay);
+    font-weight: 600;
+    font-size: 0.85rem;
+    margin-bottom: 14px;
+  }
+
+  /* ---------- Mission ---------- */
+  .mission { background: var(--ivory-deep); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+
+  .mission-quote {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.5rem, 3vw, 2.1rem);
+    line-height: 1.35;
+    max-width: 22ch;
+    color: var(--pine-deep);
+  }
+
+  .mission-body {
+    display: grid;
+    grid-template-columns: 1.3fr 0.7fr;
+    gap: 56px;
+    align-items: start;
+  }
+
+  .mission-note {
+    border-left: 2px solid var(--gold);
+    padding-left: 24px;
+    font-size: 0.98rem;
+    color: #3A3C32;
+  }
+
+  /* ---------- Program / phases ---------- */
+  .phase-list {
+    border-top: 1px solid var(--line);
+  }
+
+  .phase {
+    display: grid;
+    grid-template-columns: 90px 1fr 1.4fr;
+    gap: 32px;
+    padding: 34px 0;
+    border-bottom: 1px solid var(--line);
+    align-items: start;
+  }
+
+  .phase-num {
+    font-family: 'Fraunces', serif;
+    font-size: 2.2rem;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .phase-name {
+    font-family: 'Fraunces', serif;
+    font-size: 1.3rem;
+    color: var(--pine-deep);
+  }
+
+  .phase-span {
+    display: block;
+    font-family: 'Archivo', sans-serif;
+    font-size: 0.82rem;
+    color: var(--sage);
+    margin-top: 6px;
+  }
+
+  .phase-desc { color: #3A3C32; font-size: 0.98rem; }
+
+  /* ---------- Pillars ---------- */
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+  }
+
+  .pillar {
+    padding: 32px 28px;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .pillar h3 {
+    font-size: 1.15rem;
+    margin-bottom: 12px;
+  }
+
+  .pillar p {
+    color: #4B4E40;
+    font-size: 0.94rem;
+    margin: 0;
+  }
+
+  /* ---------- Who we serve ---------- */
+  .serve {
+    background: var(--pine-deep);
+    color: var(--ivory-deep);
+  }
+
+  .serve .section-head h2, .serve .kicker { color: var(--ivory); }
+  .serve .kicker { color: var(--gold-soft); }
+  .serve .section-head p { color: #C7CDB9; }
+
+  .serve-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+  }
+
+  .serve-item {
+    border-top: 2px solid var(--gold);
+    padding-top: 18px;
+  }
+
+  .serve-item h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.1rem;
+    color: var(--ivory);
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+
+  .serve-item p {
+    color: #C7CDB9;
+    font-size: 0.94rem;
+    margin: 0;
+  }
+
+  /* ---------- Involve ---------- */
+  .involve-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+
+  .involve-card {
+    background: var(--ivory);
+    padding: 36px 30px;
+  }
+
+  .involve-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 12px;
+  }
+
+  .involve-card p {
+    color: #4B4E40;
+    font-size: 0.95rem;
+    margin: 0 0 20px;
+  }
+
+  .involve-card a {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--clay);
+    text-decoration: none;
+    border-bottom: 1px solid var(--clay);
+    padding-bottom: 2px;
+  }
+
+  /* ---------- Contact ---------- */
+  .contact {
+    background: var(--ivory-deep);
+    border-top: 1px solid var(--line);
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 64px;
+  }
+
+  .contact-info h2 { font-size: clamp(1.8rem, 3vw, 2.2rem); margin-bottom: 18px; }
+  .contact-info p { color: #4B4E40; max-width: 40ch; }
+
+  .contact-detail {
+    margin-top: 32px;
+    font-size: 0.95rem;
+  }
+  .contact-detail div { margin-bottom: 10px; }
+  .contact-detail span { color: var(--sage); display: inline-block; width: 84px; }
+
+  form { display: flex; flex-direction: column; gap: 18px; }
+
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+
+  label {
+    display: block;
+    font-size: 0.82rem;
+    color: var(--sage);
+    margin-bottom: 6px;
+  }
+
+  input, textarea, select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--ivory);
+    font-family: 'Archivo', sans-serif;
+    font-size: 0.95rem;
+    color: var(--ink);
+  }
+
+  input:focus, textarea:focus, select:focus {
+    border-color: var(--gold);
+  }
+
+  textarea { resize: vertical; min-height: 110px; }
+
+  .form-note {
+    font-size: 0.82rem;
+    color: var(--sage);
+  }
+
+  .confirm {
+    display: none;
+    background: var(--pine-deep);
+    color: var(--ivory);
+    padding: 18px 20px;
+    border-radius: 3px;
+    font-size: 0.92rem;
+  }
+  .confirm.show { display: block; }
+
+  /* ---------- Nav login button ---------- */
+  .nav-login {
+    font-family: 'Archivo', sans-serif;
+    border: none;
+  }
+
+  /* ---------- Login modal ---------- */
+  .login-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(22, 41, 31, 0.55);
+    z-index: 50;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .login-overlay.open { display: flex; }
+
+  .login-modal {
+    background: var(--ivory);
+    border-radius: 6px;
+    max-width: 420px;
+    width: 100%;
+    padding: 32px;
+  }
+
+  .login-modal-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+  }
+
+  .login-modal-head h3 { font-size: 1.3rem; }
+
+  .login-close {
+    background: none;
+    border: none;
+    font-size: 1.4rem;
+    line-height: 1;
+    color: var(--sage);
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .login-tabs {
+    display: flex;
+    gap: 4px;
+    background: var(--ivory-deep);
+    border-radius: 4px;
+    padding: 4px;
+    margin-bottom: 22px;
+  }
+
+  .login-tab {
+    flex: 1;
+    padding: 9px 8px;
+    border: none;
+    background: transparent;
+    border-radius: 3px;
+    font-family: 'Archivo', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: #4B4E40;
+    cursor: pointer;
+  }
+
+  .login-tab.active {
+    background: var(--pine-deep);
+    color: var(--ivory);
+  }
+
+  .login-form { display: flex; flex-direction: column; gap: 16px; }
+
+  .login-links {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 4px;
+    font-size: 0.85rem;
+  }
+
+  .login-links a {
+    color: var(--clay);
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .login-role-note {
+    color: var(--sage);
+    font-size: 0.78rem;
+  }
+
+  .login-placeholder-note {
+    margin: 20px 0 0;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+    font-size: 0.78rem;
+    color: var(--sage);
+    line-height: 1.5;
+  }
+
+  /* ---------- Who we are ---------- */
+  .who-grid {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 56px;
+    align-items: start;
+  }
+
+  .who-grid p { color: #3A3C32; margin-top: 16px; }
+
+  .who-stats {
+    display: flex;
+    gap: 40px;
+    margin-top: 28px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+  }
+
+  /* ---------- Values ---------- */
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--line);
+    margin-top: 48px;
+  }
+
+  .value {
+    padding: 26px 24px 0 0;
+  }
+
+  .value-name {
+    font-family: 'Fraunces', serif;
+    font-size: 1.1rem;
+    color: var(--pine-deep);
+    margin-bottom: 8px;
+  }
+
+  .value p { color: #4B4E40; font-size: 0.92rem; margin: 0; }
+
+  /* ---------- Testimonies ---------- */
+  .testimony-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+
+  .testimony {
+    background: var(--ivory);
+    padding: 30px 28px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .testimony blockquote {
+    margin: 0 0 18px;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    line-height: 1.5;
+    color: var(--pine-deep);
+  }
+
+  .testimony cite {
+    font-style: normal;
+    font-size: 0.85rem;
+    color: var(--sage);
+    margin-top: auto;
+  }
+
+  /* ---------- Monthly updates ---------- */
+  .updates-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+  }
+
+  .update-card {
+    border-top: 2px solid var(--gold);
+    padding-top: 16px;
+  }
+
+  .update-date {
+    font-size: 0.78rem;
+    color: var(--clay);
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .update-card h3 {
+    font-size: 1.05rem;
+    margin-bottom: 10px;
+  }
+
+  .update-card p {
+    color: #4B4E40;
+    font-size: 0.92rem;
+    margin: 0 0 14px;
+  }
+
+  .update-card a {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--clay);
+    text-decoration: none;
+    border-bottom: 1px solid var(--clay);
+    padding-bottom: 2px;
+  }
+
+  /* ---------- Footer ---------- */
+  footer {
+    padding: 48px 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .footer-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  .footer-verse {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 0.98rem;
+    color: var(--pine);
+    max-width: 42ch;
+  }
+
+  .footer-meta {
+    font-size: 0.82rem;
+    color: var(--sage);
+    text-align: right;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 880px) {
+    .nav-links { display: none; }
+    .nav-toggle {
+      display: inline-block;
+      background: none;
+      border: 1px solid var(--ink);
+      border-radius: 3px;
+      padding: 8px 12px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      color: var(--ink);
+      font-family: 'Archivo', sans-serif;
+    }
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-panel { margin-top: 12px; }
+    .section-head { grid-template-columns: 1fr; gap: 20px; }
+    .mission-body { grid-template-columns: 1fr; }
+    .phase { grid-template-columns: 60px 1fr; }
+    .phase-desc { grid-column: 2 / 3; }
+    .pillars { grid-template-columns: repeat(2, 1fr); }
+    .serve-grid { grid-template-columns: 1fr; gap: 28px; }
+    .involve-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .field-row { grid-template-columns: 1fr; }
+    .footer-meta { text-align: left; }
+    .who-grid { grid-template-columns: 1fr; }
+    .values-grid { grid-template-columns: repeat(2, 1fr); }
+    .testimony-grid { grid-template-columns: 1fr; }
+    .updates-grid { grid-template-columns: 1fr; gap: 28px; }
+  }
+
+  @media (max-width: 520px) {
+    .wrap, .nav { padding-left: 20px; padding-right: 20px; }
+    .pillars { grid-template-columns: 1fr; }
+    .hero { padding: 56px 0 64px; }
+    section { padding: 64px 0; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="nav-mark">Faith Gives Second Chances<span>A residential recovery program</span></div>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#who-we-are">Who We Are</a></li>
+      <li><a href="#mission">Mission &amp; Values</a></li>
+      <li><a href="#journey">Journey of Hope</a></li>
+      <li><a href="#updates">Monthly Updates</a></li>
+      <li><a href="#testimonies">Testimonies</a></li>
+      <li><a href="#programs">Programs &amp; Services</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><button class="nav-cta nav-login" id="loginOpen" type="button">Secure Login</button></li>
+    </ul>
+    <button class="nav-toggle" onclick="document.querySelector('.nav-links').style.display='flex'; document.querySelector('.nav-links').style.flexDirection='column'; this.style.display='none';">Menu</button>
+  </div>
+</header>
+
+<div class="login-overlay" id="loginOverlay">
+  <div class="login-modal">
+    <div class="login-modal-head">
+      <div>
+        <div class="kicker">Secure login</div>
+        <h3>Sign in to your portal</h3>
+      </div>
+      <button class="login-close" id="loginClose" aria-label="Close">&times;</button>
+    </div>
+    <div class="login-tabs" role="tablist">
+      <button class="login-tab active" data-tab="client" type="button">Client</button>
+      <button class="login-tab" data-tab="case" type="button">Case Manager</button>
+      <button class="login-tab" data-tab="hr" type="button">HR / Admin</button>
+    </div>
+    <form class="login-form" id="loginForm">
+      <div>
+        <label for="loginEmail">Email or username</label>
+        <input type="text" id="loginEmail" name="loginEmail" autocomplete="username">
+      </div>
+      <div>
+        <label for="loginPass">Password</label>
+        <input type="password" id="loginPass" name="loginPass" autocomplete="current-password">
+      </div>
+      <button type="submit" class="btn btn-primary">Log In</button>
+      <div class="login-links">
+        <a href="#" id="forgotLink">Forgot password</a>
+        <span class="login-role-note">Role-based access — you'll land on the portal that matches your account.</span>
+      </div>
+    </form>
+    <p class="login-placeholder-note">This login is a design placeholder. Client, Case Manager, and HR/Admin portals require a secure backend and are scoped as a separate build.</p>
+  </div>
+</div>
+
+<section class="hero" id="home">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="hero-label">Residential recovery &amp; discipleship</div>
+      <h1>A house built for the next chapter, not the last one.</h1>
+      <p class="hero-lede">Faith Gives Second Chances is an 18-month residential program grounded in faith, structure, and community — helping men and women rebuild their lives from the ground up.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-primary">Apply to the Program</a>
+        <a href="#program" class="btn btn-ghost">See How It Works</a>
+      </div>
+    </div>
+    <div class="hero-panel">
+      <blockquote>&ldquo;If any man be in Christ, he is a new creature: old things are passed away; behold, all things are become new.&rdquo;<cite>2 Corinthians 5:17</cite></blockquote>
+      <div class="stat-row">
+        <div>
+          <div class="stat-num">18</div>
+          <div class="stat-cap">Months, in three phases</div>
+        </div>
+        <div>
+          <div class="stat-num">04</div>
+          <div class="stat-cap">Core curricula tracks</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="who-we-are">
+  <div class="wrap who-grid">
+    <div>
+      <div class="kicker">Who we are</div>
+      <h2>A house started by people who've walked this road</h2>
+    </div>
+    <div>
+      <p>Faith Gives Second Chances began with a simple conviction: recovery holds when it's built on faith, real structure, and people who won't give up on you. What started as a single home for a handful of residents has grown into a full program run by staff, mentors, and volunteers — many of whom carry their own story of restoration.</p>
+      <p>We work hand in hand with local churches, families, and treatment partners, because no one rebuilds a life alone.</p>
+      <div class="who-stats">
+        <div>
+          <div class="stat-num" style="color: var(--gold);">01</div>
+          <div class="stat-cap">House, growing every year</div>
+        </div>
+        <div>
+          <div class="stat-num" style="color: var(--gold);">18</div>
+          <div class="stat-cap">Months walked alongside every resident</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="mission" id="mission">
+  <div class="wrap">
+    <div class="mission-body">
+      <div>
+        <div class="kicker">Our mission</div>
+        <p class="mission-quote">We believe recovery is not just abstinence — it is restoration of identity, purpose, and family.</p>
+      </div>
+      <div class="mission-note">
+        Every resident enters with a different story and leaves with a shared foundation: sobriety anchored in faith, character formed through daily structure, and relationships rebuilt on trust. We work alongside local churches and families, not apart from them.
+      </div>
+    </div>
+    <div class="values-grid">
+      <div class="value">
+        <div class="value-name">Faith</div>
+        <p>We anchor every part of the program in scripture and prayer, not just program milestones.</p>
+      </div>
+      <div class="value">
+        <div class="value-name">Accountability</div>
+        <p>Structure and honesty aren't punishment — they're how trust gets rebuilt, one day at a time.</p>
+      </div>
+      <div class="value">
+        <div class="value-name">Restoration</div>
+        <p>We treat the whole person: identity, purpose, and relationships, not just sobriety alone.</p>
+      </div>
+      <div class="value">
+        <div class="value-name">Community</div>
+        <p>No one graduates this program alone — staff, mentors, churches, and family walk it together.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="journey">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="kicker">Journey of hope</div>
+        <h2>Three phases, one path forward</h2>
+      </div>
+      <p>The program is sequential by design — each phase builds the stability the next one requires, from first steps to independent living.</p>
+    </div>
+    <div class="phase-list">
+      <div class="phase">
+        <div class="phase-num">01</div>
+        <div>
+          <div class="phase-name">Foundation<span class="phase-span">Months 1–6</span></div>
+        </div>
+        <div class="phase-desc">Residents settle into structure — daily accountability, sobriety fundamentals, house responsibilities, and consistent mentorship from staff and peers who've walked the same road.</div>
+      </div>
+      <div class="phase">
+        <div class="phase-num">02</div>
+        <div>
+          <div class="phase-name">Formation<span class="phase-span">Months 7–14</span></div>
+        </div>
+        <div class="phase-desc">Character and identity work deepens through our curricula tracks, church involvement, and mentorship — while residents begin re-engaging with work and family relationships.</div>
+      </div>
+      <div class="phase">
+        <div class="phase-num">03</div>
+        <div>
+          <div class="phase-name">Fruitfulness<span class="phase-span">Months 15–18</span></div>
+        </div>
+        <div class="phase-desc">Residents prepare to transition into independent housing, steady employment, and restored family roles — with an ongoing alumni and church support network.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="tight" id="updates">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="kicker">Monthly updates</div>
+        <h2>What's happening at the house</h2>
+      </div>
+      <p>A running record of milestones, house news, and ways the community has shown up this month.</p>
+    </div>
+    <div class="updates-grid">
+      <div class="update-card">
+        <div class="update-date">Update — add month</div>
+        <h3>Three residents completed Phase One</h3>
+        <p>A short recap of the milestone, what changed for them, and what's ahead in Phase Two.</p>
+        <a href="#contact">Read the full update</a>
+      </div>
+      <div class="update-card">
+        <div class="update-date">Update — add month</div>
+        <h3>A new church partnership begins</h3>
+        <p>Introduce the partner church and what the partnership means for residents and outreach.</p>
+        <a href="#contact">Read the full update</a>
+      </div>
+      <div class="update-card">
+        <div class="update-date">Update — add month</div>
+        <h3>House needs and how to help</h3>
+        <p>Current needs — meals, supplies, mentors — and how the community can step in this month.</p>
+        <a href="#contact">Read the full update</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="testimonies">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="kicker">Testimonies</div>
+        <h2>Told in their own words</h2>
+      </div>
+      <p>Every resident's story is their own to tell. Here's a small window into what this house has meant.</p>
+    </div>
+    <div class="testimony-grid">
+      <div class="testimony">
+        <blockquote>This house gave me back my daughter. I walked in broken and walked out as a mother again.</blockquote>
+        <cite>— Resident, Phase Three graduate</cite>
+      </div>
+      <div class="testimony">
+        <blockquote>I'd tried recovery before. What was different here was that someone actually stayed with me through it.</blockquote>
+        <cite>— Resident, alumni</cite>
+      </div>
+      <div class="testimony">
+        <blockquote>Our church partnered with this house not knowing what to expect. What we found was a program worth standing behind.</blockquote>
+        <cite>— Partner church pastor</cite>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="tight" id="programs">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="kicker">Programs &amp; services</div>
+        <h2>Four curriculum tracks, one purpose</h2>
+      </div>
+      <p>Alongside recovery work, residents study one of four core curricula built around the roles they're rebuilding their lives to fill.</p>
+    </div>
+    <div class="pillars">
+      <div class="pillar">
+        <h3>Manhood</h3>
+        <p>Character, responsibility, and leadership formation for men re-establishing their footing.</p>
+      </div>
+      <div class="pillar">
+        <h3>Motherhood</h3>
+        <p>Restoring confidence and practical skill for women returning to the role of mother.</p>
+      </div>
+      <div class="pillar">
+        <h3>Marriage</h3>
+        <p>Rebuilding trust and communication for residents working toward or within marriage.</p>
+      </div>
+      <div class="pillar">
+        <h3>Family</h3>
+        <p>Reconnecting residents with children, parents, and extended family after seasons apart.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="serve">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="kicker">Who we serve</div>
+        <h2>Built for people ready to do the work</h2>
+      </div>
+      <p>We serve men and women coming out of addiction, incarceration, or crisis who are committed to a structured, faith-centered path to independence.</p>
+    </div>
+    <div class="serve-grid">
+      <div class="serve-item">
+        <h3>Coming out of treatment</h3>
+        <p>Residents transitioning from detox or inpatient treatment who need sober, structured housing to keep their footing.</p>
+      </div>
+      <div class="serve-item">
+        <h3>Reentering after incarceration</h3>
+        <p>Men and women rebuilding a stable life and record after release, with accountability and community around them.</p>
+      </div>
+      <div class="serve-item">
+        <h3>Ready to reconnect with family</h3>
+        <p>Residents working to restore relationships with children, spouses, and parents on a realistic timeline.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="involve">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="kicker">Get involved</div>
+        <h2>This works because a community carries it</h2>
+      </div>
+      <p>Faith Gives Second Chances runs on the support of donors, volunteers, and partner churches. There's a place for you in it.</p>
+    </div>
+    <div class="involve-grid">
+      <div class="involve-card">
+        <h3>Give</h3>
+        <p>Your gift covers housing, meals, curriculum materials, and mentorship for a resident rebuilding their life.</p>
+        <a href="#contact">Make a gift</a>
+      </div>
+      <div class="involve-card">
+        <h3>Volunteer</h3>
+        <p>Mentor a resident, lead a class, cook a meal, or help maintain the house. Time matters as much as money.</p>
+        <a href="#contact">Sign up to help</a>
+      </div>
+      <div class="involve-card">
+        <h3>Partner your church</h3>
+        <p>Bring your congregation alongside us through outreach, prayer support, or hosting a resident testimony.</p>
+        <a href="#contact">Start a partnership</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap contact-grid">
+    <div class="contact-info">
+      <div class="kicker">Reach out</div>
+      <h2>Start the conversation</h2>
+      <p>Whether you're applying, giving, volunteering, or asking on behalf of someone else — reach out and we'll follow up personally.</p>
+      <div class="contact-detail">
+        <div><span>Phone</span>(000) 000-0000</div>
+        <div><span>Email</span>info@faithgivessecondchances.org</div>
+        <div><span>Location</span>Update with house address</div>
+      </div>
+    </div>
+    <div>
+      <form id="contactForm">
+        <div class="field-row">
+          <div>
+            <label for="fname">First name</label>
+            <input type="text" id="fname" name="fname" required>
+          </div>
+          <div>
+            <label for="lname">Last name</label>
+            <input type="text" id="lname" name="lname" required>
+          </div>
+        </div>
+        <div class="field-row">
+          <div>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div>
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="phone">
+          </div>
+        </div>
+        <div>
+          <label for="reason">I'm reaching out about</label>
+          <select id="reason" name="reason">
+            <option>Applying to the program</option>
+            <option>Giving a donation</option>
+            <option>Volunteering</option>
+            <option>Church partnership</option>
+            <option>Something else</option>
+          </select>
+        </div>
+        <div>
+          <label for="message">Message</label>
+          <textarea id="message" name="message" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="align-self: flex-start;">Send Message</button>
+        <p class="form-note">This form is a placeholder — connect it to your email or CRM before launch.</p>
+        <div class="confirm" id="confirmMsg">Thank you — your message has been noted. We'll follow up soon.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-row">
+    <div class="footer-verse">&ldquo;He heals the brokenhearted and binds up their wounds.&rdquo; — Psalm 147:3</div>
+    <div class="footer-meta">Faith Gives Second Chances<br>A faith-based recovery house program</div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('contactForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    document.getElementById('confirmMsg').classList.add('show');
+    this.reset();
+  });
+
+  // Secure login modal (UI placeholder only — not connected to any auth system)
+  var overlay = document.getElementById('loginOverlay');
+  document.getElementById('loginOpen').addEventListener('click', function(){
+    overlay.classList.add('open');
+  });
+  document.getElementById('loginClose').addEventListener('click', function(){
+    overlay.classList.remove('open');
+  });
+  overlay.addEventListener('click', function(e){
+    if (e.target === overlay) overlay.classList.remove('open');
+  });
+  document.querySelectorAll('.login-tab').forEach(function(tab){
+    tab.addEventListener('click', function(){
+      document.querySelectorAll('.login-tab').forEach(function(t){ t.classList.remove('active'); });
+      tab.classList.add('active');
+    });
+  });
+  document.getElementById('loginForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    alert('This login is a design placeholder — no accounts exist yet. Connect this form to a real authentication system before launch.');
+  });
+  document.getElementById('forgotLink').addEventListener('click', function(e){
+    e.preventDefault();
+    alert('Placeholder only — password reset requires a real backend.');
+  });
+</script>
+
+</body>
+</html>
